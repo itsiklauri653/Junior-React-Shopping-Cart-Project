@@ -1,0 +1,26 @@
+.header{
+    position: absolute;
+    width: 1440px;
+    height: 74px;
+    top: -34px;
+    background: #FFFFFF;
+
+    .logo{
+        position: absolute;
+        width: 41px;
+        height: 41px;
+        left: 48.55%;
+        top: 20px;
+    }
+}
+
+.navbar-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    position: absolute;
+    width: 234px;
+    left: 101px;
+    bottom: -3px;
+}

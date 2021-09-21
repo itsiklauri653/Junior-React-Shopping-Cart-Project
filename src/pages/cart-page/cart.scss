@@ -1,0 +1,112 @@
+.cart-page-container{
+    margin-top: 152px;
+    margin-left: 101px;
+}
+
+.cart-page-product-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 459px;
+    margin-bottom: 20px;
+}
+
+.cart-page-info{
+    display: flex;
+    flex-direction: column;
+    
+    .cart-page-title{
+        font-size: 30px;
+        font-weight: 400;
+        margin-top: 11px;
+        width: 200px;
+        line-height: 44px;
+
+        .cart-page-product-name{
+            font-weight: 700;
+            font-size: 30px;
+        }
+    }
+
+    .cart-page-product-price{
+        margin-top: 19px;
+        margin-left: -1px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 16px;
+    }
+
+    .cart-page-items{
+        flex-direction: column;
+        display: flex;
+        margin-top: 29px;
+
+        .cart-page-attribute-name{
+            font-size: 22px;
+        }
+
+        .items{
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .cart-page-item{
+            width: 63px;
+            height: 45px;
+            font-size: 16px;
+            margin-right: 12px;
+            margin-top: -3px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #1D1F22;
+        }
+    }
+}
+
+.linebreak{
+    width: 82%;
+    height: 1px;
+    background: #E5E5E5;
+}
+
+.cart-page-amount-image{
+    display: flex;
+
+    .cart-page-amount{
+        margin-top: 21px;
+
+        .box{
+            width: 45px;
+            height: 45px;
+            border: 1px solid black;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            font-size: 51px;
+            font-weight: 200;
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+
+        .number{
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            border: none;
+        }
+    }
+
+    .cart-page-image{
+        margin-left: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img{
+            width: 141px;
+            height: 185px;
+        }
+    }
+}

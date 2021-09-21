@@ -1,0 +1,132 @@
+.card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 386px;
+
+    .card{
+        padding: 16px;
+    }
+
+    .spacer{
+        position: static;
+        width: 24px;
+        height: 24px;
+        left: 181px;
+        top: 346px;
+    
+        opacity: 0;
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        padding: 0px;
+    
+        position: static;
+        width: 354px;
+        height: 58px;
+        left: 16px;
+        top: 370px;
+
+        .title{
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 162%;
+        }
+
+        .price{
+            margin-top: 4px;
+            height: 29px;
+            left: 0px;
+            top: 29px;
+
+            div span{
+                font-size:18px;
+            }
+        }
+    }
+
+    button{
+        background: none;
+        border: none;
+    }
+}
+
+.image-container{
+    position: relative;
+    width: 100%;
+
+    .product-img{
+        width: 100%;
+        max-height: 330px;
+    }
+}
+
+.circle-icon {
+    position: absolute;
+    right: 16px;
+    bottom: -26px;
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    background-color: #5ECE7B;
+    opacity: 0;
+    transition: 0.2s;
+    .circle{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button{
+            cursor: pointer;
+        }
+        img{
+            width: 24px;
+            height: 24px;
+        }
+    }
+    
+}
+
+.circle-icon:hover{
+    background-color: #68E288;
+}
+
+.card-container{
+    &:hover{
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        .circle-icon{
+            opacity: 1;
+        }
+    }
+}
+
+
+.card-container--out{
+    opacity: 0.5;
+}
+
+.out-of-stock{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-weight: normal;
+    font-size: 24px;
+    transform: translate(-50%,-50%);
+    color: #8D8F9A;
+}
+
+.card-container--out{
+    .out-of-stock{
+        display: block;
+    }
+
+    button:disabled{
+        cursor:auto;
+    }
+}

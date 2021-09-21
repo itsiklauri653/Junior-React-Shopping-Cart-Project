@@ -1,0 +1,41 @@
+$primary-color:#5ECE7B;
+
+*{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+}
+
+.navlink-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 0px;
+
+    a.label{
+        position: static;
+        text-decoration: none;
+        left: 0%;
+        right: 0%;
+        top: calc(50% - 20px/2 - 16px);
+
+        display: flex;
+        text-align: center;
+        text-transform: uppercase;
+        color: #1D1F22;
+
+        padding-left: 16px;
+        padding-right: 16px;
+        height: 52px;
+    }
+
+    a.label-active{
+        color:$primary-color;
+        border-bottom: #5ECE7B solid 2px;
+    }
+}
+
+
+
