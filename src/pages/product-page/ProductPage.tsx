@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import CartDropdown from "../../components/Cart/CartDropdown";
 import { getCurrencySymbol, getPrice } from "../../helpers/PriceHelper";
 import Product from "../../models/product";
 import './product.scss';

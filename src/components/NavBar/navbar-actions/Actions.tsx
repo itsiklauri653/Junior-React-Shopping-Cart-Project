@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from 'styled-components';
 import emptyCart from '../../../assets/empty-cart.svg';
 import vector from '../../../assets/vector.svg';
 import './navbar-actions.scss';

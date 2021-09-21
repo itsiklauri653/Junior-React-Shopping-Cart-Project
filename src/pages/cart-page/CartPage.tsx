@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CartDropdown from "../../components/Cart/CartDropdown";
 import CurrencyOverLay from "../../components/Currency/CurrencyDropdown";
