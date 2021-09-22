@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { getCurrencySymbol, getPrice } from "../../helpers/PriceHelper";
+import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
 
 interface Props{
@@ -8,14 +9,18 @@ interface Props{
     index: number,
     addToCart: (item: Product) => void,
     removeFromCart: (id: string) => void,
-    currency: string
+    currency: string,
+    changeTextAttribute: (selector:string, attrValue:string) => void
+    changeColor: (selector:string, attrValue:string) => void,
+    attr: DefaultAttribute
 }
 
-const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart, currency}) => {
+const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart, currency, changeColor, changeTextAttribute, attr}) => {
+    var selector = `#${product.id} div.cart-page-info div.cart-page-items`
     return(
         <>
             <div key={index} className="linebreak"></div>
-            <div key={product.id} className="cart-page-product-container">
+            <div id={product.id} key={product.id} className="cart-page-product-container">
                 <div className="cart-page-info">
                     <span className="cart-page-title">
                         <span className="cart-page-product-name">
@@ -31,13 +36,20 @@ const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart
                     <span className="cart-page-product-price">{getCurrencySymbol(currency)}{getPrice(currency,product)}</span>
                     {product.attributes.map(attribute => (
                             <div key={attribute.id} className="cart-page-items">
-                                <div className="cart-page-attribute-name">{attribute.name}</div>
+                                <div className="attr-name">{attribute.name}</div>
                                 <div className="items">
                                 {attribute.items.map(item => (
                                     <>
                                         {attribute.type === "swatch" ? 
-                                            <div key={item.id} className="cart-page-item" style={{background:item.value}}></div> :
-                                            <div key={item.id} className="cart-page-item">{item.value}</div>}
+                                            <div onClick={() => changeColor(selector, item.value)} 
+                                                key={item.id} 
+                                                className={`item ${attr.name === attribute.name && attr.value === item.value ? "attr-color-active" : ""}`} 
+                                                style={{background:item.value}}></div> :
+                                            <div onClick={() => changeTextAttribute(selector, item.value)} 
+                                                key={item.id} id={item.id} 
+                                                className={`item ${attr.name === attribute.name && attr.value === item.value ? "attr-active" : ""}`}>
+                                                    {item.value}
+                                            </div>}
                                         
                                     </>
                                 ))}

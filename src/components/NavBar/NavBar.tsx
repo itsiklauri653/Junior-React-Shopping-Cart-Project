@@ -19,7 +19,7 @@ export default function NavBar({categories,cartItemsCount, clickOnCart, clickOnC
             <div className="navbar-container">
                 <NavLinks categories={categories}/>
             </div>
-            <NavLink to={{pathname:"/",state:{isOpen:false}}}><img className="logo" src={logo} /></NavLink>
+            <NavLink to={{pathname:"/",state:{isOpen:false}}}><img className="logo" alt="logo" src={logo} /></NavLink>
             <Actions 
                 currency={currency}
                 clickOnCurrency={clickOnCurrency} 

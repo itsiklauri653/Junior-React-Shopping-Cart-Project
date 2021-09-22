@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { calculateTotal } from "../../helpers/PriceHelper";
+import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
 import './cart-dropdown.scss';
 import CartItem from "./CartItem";
@@ -9,24 +11,15 @@ interface Props{
     addToCart: (item: Product) => void,
     removeFromCart: (id: string) => void,
     currency: string,
-    closeCartDropdown:() => void
+    changeTextAttribute: (selector:string, attrValue:string) => void,
+    changeColor: (selector:string, attrValue:string) => void,
+    closeCartDropdown:() => void,
+    attribute: DefaultAttribute
 }
 
-export default function CartDropdown({products, addToCart, removeFromCart, currency,closeCartDropdown}: Props){
-    const calculateTotal = (items: Product[]) =>{
-        return items.reduce((ack:number, item) => ack + item.amount * getPrice(currency,item),0);
-    }
-    
-    const getPrice = (currency: string, product: Product | undefined) => {
-        if(product){
-            const prod = product.prices.find(price => price.currency === currency)
-            if(prod?.amount){
-                return prod.amount;
-            }
-            return 0;
-        }
-        return 0;
-    }
+export default function CartDropdown({products, addToCart, removeFromCart, 
+    currency, closeCartDropdown, changeTextAttribute, changeColor, attribute}: Props){
+
 
     return(
         <div className="container">
@@ -38,7 +31,10 @@ export default function CartDropdown({products, addToCart, removeFromCart, curre
                 <div className="empty-message">Cart is empty! Please add items first.</div> :
                 <>
                     {products.map(product => (
-                        <CartItem 
+                        <CartItem
+                            attr={attribute}
+                            changeTextAttribute={changeTextAttribute}
+                            changeColor={changeColor}
                             currency={currency}
                             key={product.id} 
                             product = {product}
@@ -48,7 +44,7 @@ export default function CartDropdown({products, addToCart, removeFromCart, curre
                     ))}
                     <div className="total">
                         <div className="total-word"><strong>Total</strong></div>
-                        <div className="total-amount"><strong>${calculateTotal(products).toFixed(2)}</strong></div>                           
+                        <div className="total-amount"><strong>${calculateTotal(products,currency).toFixed(2)}</strong></div>                           
                     </div>
                     <div className="buttons">
                         <NavLink onClick={closeCartDropdown} className='bag' to={{pathname:"/cart",state:products}}>VIEW BAG</NavLink>

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CartDropdown from "../../components/Cart/CartDropdown";
 import CurrencyOverLay from "../../components/Currency/CurrencyDropdown";
+import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
 import './cart.scss';
 import CartPageItem from "./CartPageItem";
@@ -15,15 +16,22 @@ interface Props{
     currencyOpen: boolean,
     closeCartDropdown: () => void,
     changeCurrency: (currency: string) => void,
-    currencies: string[]
+    currencies: string[],
+    changeTextAttribute: (selector:string, attrValue:string) => void
+    changeColor: (selector:string, attrValue:string) => void,
+    attribute: DefaultAttribute
 }
 
 const CartPage:React.FC<Props> = ({products, addToCart, removeFromCart, 
-    currency, cartIsOpen, currencyOpen,closeCartDropdown, changeCurrency, currencies}) => {
+    currency, cartIsOpen, currencyOpen,closeCartDropdown, changeCurrency, 
+    currencies, changeTextAttribute, changeColor, attribute}) => {
     return (
         <Container>
             {cartIsOpen &&
                     <CartDropdown 
+                      attribute={attribute}
+                      changeTextAttribute={changeTextAttribute}
+                      changeColor={changeColor}
                       closeCartDropdown={closeCartDropdown}
                       currency={currency}
                       products={products} 
@@ -42,10 +50,13 @@ const CartPage:React.FC<Props> = ({products, addToCart, removeFromCart,
             {products.length === 0 &&
                 <div>Cart is Empty!!</div>}
             {products.map((product,i) => (
-                <CartPageItem 
+                <CartPageItem
+                    attr={attribute}
+                    changeTextAttribute={changeTextAttribute}
+                    changeColor={changeColor}
                     addToCart={addToCart}
                     removeFromCart={removeFromCart}
-                    key={i}
+                    key={product.id + i}
                     currency={currency} 
                     product={product} 
                     index={i} 

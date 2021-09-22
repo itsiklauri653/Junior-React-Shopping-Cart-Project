@@ -40,7 +40,7 @@
         display: flex;
         margin-top: 29px;
 
-        .cart-page-attribute-name{
+        .attr-name{
             font-size: 22px;
         }
 
@@ -49,7 +49,7 @@
             margin-top: 20px;
         }
 
-        .cart-page-item{
+        .item{
             width: 63px;
             height: 45px;
             font-size: 16px;
@@ -60,6 +60,7 @@
             justify-content: center;
             align-items: center;
             border: 1px solid #1D1F22;
+            cursor: pointer;
         }
     }
 }

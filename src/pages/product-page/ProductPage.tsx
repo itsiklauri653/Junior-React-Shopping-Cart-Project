@@ -1,34 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { getCurrencySymbol, getPrice } from "../../helpers/PriceHelper";
+import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
 import './product.scss';
 
 interface Props{
     addToCart: (item:Product) => void,
     currency: string,
+    changeTextAttribute: (selector:string, attrValue:string, attrName:string) => void
+    changeColor: (selector:string, attrValue:string) => void,
+    attr: DefaultAttribute
 }
 
-const ProductPage:React.FC<Props> = ({addToCart,currency}
+const ProductPage:React.FC<Props> = ({addToCart,currency, changeColor, changeTextAttribute, attr}
 ) => {
     const location = useLocation();
     const product = location.state as Product
 
+    const[mainImage,setMainImage] = useState(product.gallery[0]);
+
+    var selector = `#${product.id} div.product-attribute div.attributes`
+
     return(
         <Container>
             <div className="images">
-                {product.gallery.filter((img,i) => i !== 0).map(img => (
-                    <div className="product-image-container">
-                        <img src={img} />
+                {product.gallery.map(img => (
+                    <div style={{cursor:"pointer"}} key={img} onClick={() => setMainImage(img)} className="product-image-container">
+                        <img alt=" " src={img} />
                     </div>
                 ))}
             </div>
             <div className="main-image">
-                <img src={product.gallery[0]}/>
+                <img alt=" " src={mainImage}/>
             </div>
-            <div className="product-info-container">
+            <div id={product.id} className="product-info-container">
                 <div className="product-name">
                     <span>
                         {product.name.substr(0,product.name.indexOf(" ")) !== "" ? 
@@ -41,26 +48,21 @@ const ProductPage:React.FC<Props> = ({addToCart,currency}
                             }
                 </div>
                 <div className="product-attribute">
-                    {product.attributes.map(attr => (
-                        <>
-                            <div className="attr-name">{attr.name.toUpperCase()}</div>
+                    {product.attributes.map(attribute => (
+                        <div className="attributes">
+                            <div className="attr-name">{attribute.name.toUpperCase()}</div>
                             <div className="attr-items">
-                                {attr.items.map(item => (
+                                {attribute.items.map(item => (
                                     <>
-                                        {attr.type === "swatch" ? 
-                                            <NavLink 
-                                                activeClassName="attr-item-active" 
-                                                to={{pathname:"/product/" + product.id + `?${attr.name}=${item.value}`,state:product}} 
-                                                className="attr-item" 
-                                                style={{background:item.value}}></NavLink> :
-                                            <NavLink 
-                                                activeClassName="attr-item-active-non-swatch" 
-                                                to={{pathname:"/product/" + product.id + `?${attr.name}=${item.value}`,state:product}}  
-                                                className="attr-item">{item.value}</NavLink>}
+                                        {attribute.type === "swatch" ? 
+                                            <div onClick={() => changeColor(selector,item.value)} 
+                                                className={`item ${attr.name === attribute.name && attr.value === item.value ? "attr-active" : ""}`}  style={{background:item.value}}></div> :
+                                            <div onClick={() => changeTextAttribute(selector,item.value,attribute.name)} 
+                                                className={`item ${attr.name === attribute.name && attr.value === item.value ? "attr-active" : ""}`} >{item.value}</div>}
                                     </>
                                 ))}
                             </div>
-                        </>
+                        </div>
                     ))}
                 </div>
                 <div className="product-price">

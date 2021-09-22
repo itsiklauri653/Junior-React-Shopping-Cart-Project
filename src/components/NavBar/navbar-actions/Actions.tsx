@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import emptyCart from '../../../assets/empty-cart.svg';
 import vector from '../../../assets/vector.svg';
 import './navbar-actions.scss';
@@ -29,7 +29,7 @@ export default function Actions({cartItemsCount, clickOnCart, clickOnCurrency, c
             <div className="icon-container">
                 <button onClick={clickOnCart} type="button" style={{background:"none",border:"none",cursor:"pointer"}}>
                     <span className="product-count">{cartItemsCount}</span>
-                    <img className="empty-cart" src={emptyCart} />
+                    <img className="empty-cart" alt=" " src={emptyCart} />
                 </button>
             </div>
             <div className="currency-container">
@@ -38,7 +38,7 @@ export default function Actions({cartItemsCount, clickOnCart, clickOnCurrency, c
                         <span>{getCurrencySymbol(currency)}</span>
                     </button>
                 </div>
-                <img className="vector" src={vector} />
+                <img className="vector" alt=" " src={vector} />
             </div>
         </div>
     )

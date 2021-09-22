@@ -24,7 +24,7 @@ export default function ProductCard({product, onClick, currency}: Props){
                                     onClick={() => onClick(product)} 
                                     type="button"
                                 >
-                                    <img src={emptyCart}/>
+                                    <img alt="empty" src={emptyCart}/>
                                 </button>
                             </div>
                         </div>
@@ -32,7 +32,7 @@ export default function ProductCard({product, onClick, currency}: Props){
                         <NavLink
                             to={{pathname:"/product/" + product.id,state:product}} 
                             style={{background:"none",border:"none", textDecoration:"none", color:"black"}}>
-                            <img style={{width:"354px",height:"330px"}}className="product-img" src={product.gallery[0]}/>
+                            <img style={{width:"354px",height:"330px"}}className="product-img" alt=" " src={product.gallery[0]}/>
                         </NavLink>
                     </div>
                     <div className="spacer"></div>

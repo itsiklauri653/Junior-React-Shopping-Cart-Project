@@ -16,8 +16,15 @@ export const getCurrencySymbol = (currency: string) => {
             return "$"
     }
 }
-export const getPrice = (currency: string, product: Product) => {
-    return product.prices.find(price => price.currency === currency)?.amount
+export const getPrice = (currency: string, product: Product | undefined) => {
+    if(product){
+        const prod = product.prices.find(price => price.currency === currency)
+        if(prod?.amount){
+            return prod.amount;
+        }
+        return 0;
+    }
+    return 0;
 }
 
 export const getCurrencySymbols = (currencies: string[]) => {
@@ -38,4 +45,8 @@ export const getCurrencySymbols = (currencies: string[]) => {
     })
 
     return symbols;
+}
+
+export const calculateTotal = (items: Product[], currency:string) =>{
+    return items.reduce((ack:number, item) => ack + item.amount * getPrice(currency,item),0);
 }

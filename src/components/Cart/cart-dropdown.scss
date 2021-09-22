@@ -49,12 +49,17 @@
         margin-top: 11px;
     }
 
+    .attr-name{
+        margin-top: 20px;
+    }
+
     .items{
         display: grid;
         grid-template-columns: repeat(3,1fr);
         grid-gap: 9px 0;
         margin-top: 29px;
 
+        
         .item{
             margin-right: 9px;
             text-align: center;
@@ -64,6 +69,7 @@
             height: 24px;
             font-size: 11px;
             border: 1px solid #1D1F22;
+            cursor: pointer;
         }
     }
 }

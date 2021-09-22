@@ -56,7 +56,7 @@
             margin-bottom: 20px;
         }
 
-        .attr-item{
+        .item{
             width: 63px;
             height: 45px;
             display: flex;
@@ -68,7 +68,7 @@
             font-family: Source Sans Pro;
             font-weight: 400;
             text-decoration: none;
-            color:black
+            cursor: pointer;
         }
 
         .attr-item-active{
