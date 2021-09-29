@@ -1,8 +1,9 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
 import { getCurrencySymbol, getPrice } from "../../helpers/PriceHelper";
 import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
+import leftArrow from '../../assets/left-arrow.svg';
+import rightArrow from '../../assets/right-arrow.svg';
 
 interface Props{
     product: Product,
@@ -17,6 +18,30 @@ interface Props{
 
 const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart, currency, changeColor, changeTextAttribute, attr}) => {
     var selector = `#${product.id} div.cart-page-info div.cart-page-items`
+    
+    const [imgIndex, setImgIndex] = useState(0);
+    const [mainImage, setMainImage] = useState(product.gallery[imgIndex]);
+    
+    const handleImageChangeWithLeftArrow = () => {
+        if(imgIndex - 1 < 0){
+            setImgIndex(product.gallery.length - 1)
+        }
+        else{
+            setImgIndex(prev => prev - 1);
+        }
+        setMainImage(prev => prev = product.gallery[imgIndex])
+    }
+
+    const handleImageChangeWithRightArrow = () => {
+        if(imgIndex + 1 === product.gallery.length){
+            setImgIndex(0)
+        }
+        else{
+            setImgIndex(prev => prev + 1);
+        }
+        setMainImage(prev => prev = product.gallery[imgIndex])
+    }
+
     return(
         <>
             <div key={index} className="linebreak"></div>
@@ -39,7 +64,7 @@ const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart
                                 <div className="attr-name">{attribute.name}</div>
                                 <div className="items">
                                 {attribute.items.map(item => (
-                                    <>
+                                    <div key={item.id}>
                                         {attribute.type === "swatch" ? 
                                             <div onClick={() => changeColor(selector, item.value)} 
                                                 key={item.id} 
@@ -51,7 +76,7 @@ const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart
                                                     {item.value}
                                             </div>}
                                         
-                                    </>
+                                    </div>
                                 ))}
                                 </div>
                             </div>
@@ -63,13 +88,19 @@ const CartPageItem:React.FC<Props> = ({product, index, addToCart, removeFromCart
                         <div className="box number">{product.amount}</div>
                         <div onClick={() => removeFromCart(product.id)} className="box">-</div>
                     </div>
-                    <NavLink to={{pathname:"/product/" + product.id,state:product}}
-                        style={{background:"none",border:"none",textDecoration:"none",color:"black"}}
-                    >
                     <div className="cart-page-image">
-                        <img src={product.gallery[0]} alt="" />
+                        <div 
+                            className="arrow-container left-arrow-container"
+                            onClick={() => handleImageChangeWithLeftArrow()}>
+                            <img className="arrow arrow-left" src={leftArrow} alt="" />
+                        </div>
+                        <div 
+                            onClick={() => handleImageChangeWithRightArrow()} 
+                            className="arrow-container right-arrow-container">
+                                <img className="arrow arrow-right" src={rightArrow} alt="" />
+                        </div>
+                        <img className="item-main-image" src={mainImage} alt="" />
                     </div>
-                    </NavLink>
                 </div>
             </div>
         </>

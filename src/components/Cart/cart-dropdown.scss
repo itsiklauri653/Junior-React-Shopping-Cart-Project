@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 .empty-message{
     text-align: center;
     font-size: 30px;
@@ -13,12 +18,23 @@
     width: 325px;
     position: absolute;
     background: #FFFFFF;
-    display: flex;
+    max-height: 700px;
     flex-direction: column;
     right: 87px;
     top: 39px;
     justify-content: center;
-    z-index: 1;
+    z-index: 4;
+
+
+    .products{
+        flex-direction: column;
+        top: 39px;
+        justify-content: center;
+        max-height: 500px;
+        overflow: auto;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
 }
 
 .cart-title{
@@ -39,7 +55,7 @@
     display: flex;
     flex-direction: column;
     
-    .title{
+    .product-name{
         margin-top: 26px;
         width: 108px;
         line-height: 160%;
@@ -110,9 +126,9 @@
 
     .image{
         margin-left: 9px;
+        margin-top: 22px;
 
         img{
-            width: 105px;
             height: 137px;
         }
     }
@@ -121,14 +137,15 @@
 .total{
     font-family: Roboto;
     display: grid;
-    width: 100%;
     margin-top: 15px;
     margin-left: 18px;
+    margin-right: 18px;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 130px;
 
     .total-amount{
         margin-top: -4px;
+        word-break: break-all;
     }
 }
 

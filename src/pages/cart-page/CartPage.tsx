@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import CartDropdown from "../../components/Cart/CartDropdown";
 import CurrencyOverLay from "../../components/Currency/CurrencyDropdown";
 import { DefaultAttribute } from "../../models/attributes";
@@ -26,7 +25,7 @@ const CartPage:React.FC<Props> = ({products, addToCart, removeFromCart,
     currency, cartIsOpen, currencyOpen,closeCartDropdown, changeCurrency, 
     currencies, changeTextAttribute, changeColor, attribute}) => {
     return (
-        <Container>
+        <div className="cart-page-wrapper">
             {cartIsOpen &&
                     <CartDropdown 
                       attribute={attribute}
@@ -45,7 +44,7 @@ const CartPage:React.FC<Props> = ({products, addToCart, removeFromCart,
                       currencies={currencies}
                     />
                 }
-            <Title>CART</Title>
+            <h2 className="title">CART</h2>
             <div className="cart-page-container">
             {products.length === 0 &&
                 <div>Cart is Empty!!</div>}
@@ -63,33 +62,8 @@ const CartPage:React.FC<Props> = ({products, addToCart, removeFromCart,
                 />
             ))}
             </div>
-        </Container>
+        </div>
       );
     }
 
     export default CartPage
-    
-    const Container = styled.div`
-      position: relative;
-      width: 100%;
-    `
-    
-    
-    const Title = styled.h2`
-        position: relative;
-        height: 68px;
-        left: 101px;
-        top: 106.5px;
-        letter-spacing: -0.3px;
-    
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 32px;
-        line-height: 160%;
-    
-        display: flex;
-        align-items: center;
-    
-        color: #1D1F22;
-    `

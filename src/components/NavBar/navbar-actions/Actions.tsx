@@ -7,9 +7,12 @@ interface Props{
     cartItemsCount: number,
     clickOnCart: any,
     clickOnCurrency: any,
-    currency: string
+    currency: string,
+    cartIsOpen: boolean,
+    currencyIsOpen: boolean
 }
-export default function Actions({cartItemsCount, clickOnCart, clickOnCurrency, currency}: Props) {
+
+const Actions: React.FC<Props> = ({cartIsOpen,cartItemsCount,clickOnCart,clickOnCurrency,currency,currencyIsOpen}) => {
     const getCurrencySymbol = (currency: string) => {
         switch(currency){
             case "USD": return "$"
@@ -27,14 +30,22 @@ export default function Actions({cartItemsCount, clickOnCart, clickOnCurrency, c
             <div className="spacer"></div>
             <div className="spacer"></div>
             <div className="icon-container">
-                <button onClick={clickOnCart} type="button" style={{background:"none",border:"none",cursor:"pointer"}}>
+                <button
+                    disabled={currencyIsOpen}
+                    onClick={clickOnCart} 
+                    type="button"
+                >
                     <span className="product-count">{cartItemsCount}</span>
                     <img className="empty-cart" alt=" " src={emptyCart} />
                 </button>
             </div>
             <div className="currency-container">
                 <div className="currency-symbol">
-                    <button onClick={clickOnCurrency} type="button"  style={{background:"none",border:"none",cursor:"pointer"}}>
+                    <button 
+                        disabled={cartIsOpen}
+                        onClick={clickOnCurrency} 
+                        type="button" 
+                    >
                         <span>{getCurrencySymbol(currency)}</span>
                     </button>
                 </div>
@@ -43,3 +54,4 @@ export default function Actions({cartItemsCount, clickOnCart, clickOnCurrency, c
         </div>
     )
 }
+export default Actions;

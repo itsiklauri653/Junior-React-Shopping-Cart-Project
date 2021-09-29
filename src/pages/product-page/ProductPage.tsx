@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import styled from "styled-components";
 import { getCurrencySymbol, getPrice } from "../../helpers/PriceHelper";
 import { DefaultAttribute } from "../../models/attributes";
 import Product from "../../models/product";
@@ -23,16 +22,24 @@ const ProductPage:React.FC<Props> = ({addToCart,currency, changeColor, changeTex
 
     var selector = `#${product.id} div.product-attribute div.attributes`
 
+    useEffect(() => {
+        document.getElementsByClassName("description")[0].innerHTML = product.description
+    },[product.description])
+
     return(
-        <Container>
+        <div className="product-page-container">
             <div className="images">
                 {product.gallery.map(img => (
-                    <div style={{cursor:"pointer"}} key={img} onClick={() => setMainImage(img)} className="product-image-container">
+                    <div style={{cursor:"pointer"}} 
+                        key={img} 
+                        onClick={() => setMainImage(img)} 
+                        className="product-image-container">
                         <img alt=" " src={img} />
                     </div>
                 ))}
             </div>
-            <div className="main-image">
+            <div className={`main-image ${!product.inStock ? "main-image--out" : ""}`}>
+                <div className="out-of-stock">OUT OF STOCK</div>
                 <img alt=" " src={mainImage}/>
             </div>
             <div id={product.id} className="product-info-container">
@@ -72,18 +79,10 @@ const ProductPage:React.FC<Props> = ({addToCart,currency, changeColor, changeTex
                 <button className="add-to-cart" disabled={!product.inStock} onClick={() => addToCart(product)} type="button" style={{background:"none",border:"none"}}>
                     <div className="add-to-cart-button">ADD TO CART</div>
                 </button>
-                <div dangerouslySetInnerHTML={{__html:product.description}} className="description"></div>
+                <div className="description"></div>
             </div>
-        </Container>
+        </div>
     )
 }
 
 export default ProductPage;
-
-const Container = styled.div`
-    position: relative;
-    width: 100%;
-    display: flex;
-    top: 122px;
-    left: 100px;
-`

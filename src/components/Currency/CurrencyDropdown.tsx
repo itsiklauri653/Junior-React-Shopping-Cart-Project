@@ -2,20 +2,20 @@ import React from "react";
 import { getCurrencySymbols } from "../../helpers/PriceHelper";
 import './currency-dropdown.scss';
 
-interface Props{
-    currencies:string[],
+interface Props {
+    currencies: string[],
     changeCurrency: (currency: string) => void
 }
 
-export default function CurrencyOverLay({currencies, changeCurrency}:Props){
+const CurrencyOverLay: React.FC<Props> = ({ currencies, changeCurrency }) => {
     const currenciesWithSymbols = getCurrencySymbols(currencies);
-    return(
+    return (
         <div className="currency-switcher-container">
-            {currenciesWithSymbols.map((currency:any) => (
+            {currenciesWithSymbols.map((currency: any) => (
                 <div key={currency.name} className="currency">
-                    <button 
+                    <button
                         onClick={() => changeCurrency(currency.name)}
-                        style={{background:"none",border:"none", cursor:"pointer"}}
+                        style={{ background: "none", border: "none", cursor: "pointer" }}
                     >
                         <span className="symbol">{currency.symbol}</span>
                         <span className="name">{currency.name}</span>
@@ -25,3 +25,4 @@ export default function CurrencyOverLay({currencies, changeCurrency}:Props){
         </div>
     )
 }
+export default CurrencyOverLay;

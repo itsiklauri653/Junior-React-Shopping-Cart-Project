@@ -88,3 +88,13 @@
         bottom: 38.75%;
     }
 }
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: auto;
+}
